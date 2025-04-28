@@ -1,12 +1,13 @@
 import pygame
 import sys
 from pathlib import Path
+from player import Player
 # 初始化 pygame
 pygame.init()
 
 # 設定視窗大小
 SCREEN_WIDTH = 760
-SCREEN_HEIGHT = 760
+SCREEN_HEIGHT = 800
 playground = [SCREEN_WIDTH, SCREEN_HEIGHT]
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption("Pygame 基本範例")
@@ -23,6 +24,8 @@ background=background.convert()
 background.fill((50,50,50))
 # 遊戲時鐘（用來控制FPS）
 fps=120
+movingScale =600/fps
+player =Player(playground=playground,sensitivity = movingScale)
 clock = pygame.time.Clock()
 
 
@@ -36,7 +39,8 @@ while running:
             running = False
 
     screen.blit(background,(0,0))
-
+    player.update()
+    screen.blit(player.image,player.xy)
     pygame.display.update()  # 更新畫面
 
     # 控制每秒幀數
@@ -45,3 +49,5 @@ while running:
 # 結束
 pygame.quit()
 sys.exit()
+
+
