@@ -69,6 +69,7 @@ class GameObject:
         return (self._x, self._y)
     
     def to_the_left(self):
+        
         self._changeX=-self._moveScale
 
     def to_the_right(self):
@@ -77,7 +78,7 @@ class GameObject:
     def to_the_bottom(self):
         self._changeY=self._moveScale
 
-    def to_the_TOP(self):
+    def to_the_top(self):
         self._changeY=-self._moveScale
 
     def stop_x(self):
@@ -85,3 +86,6 @@ class GameObject:
 
     def stop_y(self):
         self._changeY = 0
+
+    def available(self):
+        self.available = self._available

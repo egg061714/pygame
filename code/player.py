@@ -3,6 +3,7 @@ from typing import Union
 import pygame
 from pygame.surface import Surface, SurfaceType
 from gobject import GameObject
+
 import math
 
 class Player(GameObject):
@@ -22,7 +23,7 @@ class Player(GameObject):
             self._x = xy[0]
             self._y = xy[1]
         
-        self_objectBound = (10,self._playground[0] - (self._image.get_rect().w+10),10,self._playground[1] - (self._image.get_rect().h+10))
+        self._objectBound = (10,self._playground[0] - (self._image.get_rect().w+10),10,self._playground[1] - (self._image.get_rect().h+10))
 
     def update(self):
         GameObject.update(self)
@@ -36,3 +37,5 @@ class Player(GameObject):
                 m.hp = -1
                 m.collided = True
                 m.available =False
+
+
