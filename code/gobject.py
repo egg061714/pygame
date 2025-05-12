@@ -64,6 +64,11 @@ class GameObject:
     @property
     def image(self):
         return self._image
+    
+    @property
+    def moveScale(self):
+        return self._moveScale
+    
     @property
     def xy(self):
         return (self._x, self._y)

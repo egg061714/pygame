@@ -3,6 +3,9 @@ import sys
 from pathlib import Path
 from player import Player
 from missile import MyMissile 
+from enemy import Enemy
+import random
+
 # 初始化 pygame
 pygame.init()
 
@@ -32,7 +35,16 @@ clock = pygame.time.Clock()
 keyCountX = 0
 keyCountY = 0
 Missiles=[]
+emeny = []
+
+
+
 launchMissile = pygame.USEREVENT+1
+createEmany = pygame.USEREVENT+2
+
+
+#創立事件
+pygame.time.set_timer(createEmany,1000)
 # 遊戲主迴圈
 running = True
 
@@ -93,12 +105,22 @@ while running:
                 m_x = player._x + 80
                 Missiles.append(MyMissile(xy=(m_x, m_y), playground=playground, sensitivity=movingScale))
 
+        if event.type == createEmany:
+            emeny.append(Enemy(playground=playground, sensitivity=movingScale))
+
 
     screen.blit(background,(0,0))
     Missiles = [item for item in Missiles if item.available]
     for m in Missiles: 
         m.update()
         screen.blit(m.image,m.xy)
+
+    emeny = [e for e in emeny if e.available]
+    for e in emeny:
+        print("更新嘞更新嘞")
+        e.update()
+        screen.blit(e.image, e.xy)
+
     player.update()
     screen.blit(player.image,player.xy)
     pygame.display.update()  # 更新畫面
