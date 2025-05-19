@@ -20,6 +20,12 @@ class GameObject:
         self._center = None
         self._radius = None
         self._collided = False
+
+
+
+
+
+        
     def update(self):
         self.x +=self._changeX
         self.y +=self._changeY
@@ -36,7 +42,7 @@ class GameObject:
 
     def _collided_(self,it):
         distance = math.hypot(self._center[0]-it.center[0],self.center[1]-it.center[1])
-        if distance < self._radius + it.rsdius:
+        if distance < self._radius + it.radius:
             return True
         else:
             return False
@@ -73,6 +79,11 @@ class GameObject:
     def xy(self):
         return (self._x, self._y)
     
+    @property
+    def center(self):
+        return self._center
+    
+
     def to_the_left(self):
         
         self._changeX=-self._moveScale
@@ -94,3 +105,24 @@ class GameObject:
 
     def available(self):
         self.available = self._available
+
+
+    @property
+    def radius(self):
+        return self._radius    
+    
+    @property
+    def collided(self):
+        return self._collided
+
+    @collided.setter
+    def collided(self, value):
+        self._collided = value
+
+    @property
+    def available(self):
+        return self._available
+
+    @available.setter
+    def available(self, value):
+        self._available = value

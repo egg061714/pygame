@@ -5,7 +5,7 @@ from player import Player
 from missile import MyMissile 
 from enemy import Enemy
 import random
-
+from explosion import Explosion
 # 初始化 pygame
 pygame.init()
 
@@ -36,7 +36,7 @@ keyCountX = 0
 keyCountY = 0
 Missiles=[]
 emeny = []
-
+Boom = []
 
 
 launchMissile = pygame.USEREVENT+1
@@ -110,6 +110,20 @@ while running:
 
 
     screen.blit(background,(0,0))
+
+    player.collision_detect(emeny)
+    for e in emeny:
+        if e.collided:
+            Boom.append(Explosion(e.center))
+
+    for m in Missiles:
+        m.collision_detect(emeny)
+
+    for e in Missiles:
+        if e.collided:
+            Boom.append(Explosion(e.center))
+
+
     Missiles = [item for item in Missiles if item.available]
     for m in Missiles: 
         m.update()
@@ -117,12 +131,18 @@ while running:
 
     emeny = [e for e in emeny if e.available]
     for e in emeny:
-        print("更新嘞更新嘞")
+        # print("更新嘞更新嘞")
         e.update()
         screen.blit(e.image, e.xy)
 
     player.update()
     screen.blit(player.image,player.xy)
+
+    Boom = [item for item in Boom if item.available]
+    for e in Boom:
+        e.update()
+        screen.blit(e.image,e.xy)
+
     pygame.display.update()  # 更新畫面
 
     # 控制每秒幀數

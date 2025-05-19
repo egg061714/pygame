@@ -9,7 +9,7 @@ import math
 class Enemy(GameObject):
     def __init__(self, playground,xy=None,sensitivity = 1):
         GameObject.__init__(self,playground)
-        self._moveScale=0.5*sensitivity
+        self._moveScale=0.1*sensitivity
         _parent_path=Path(__file__).parents[1]
         self._player_path = _parent_path/'resource'/'enemy.png'
         self._image = pygame.image.load(self._player_path)
